@@ -17,8 +17,14 @@
 		  </button>
 		  <div class="collapse navbar-collapse" id="navbarText">
 		    <ul class="navbar-nav mr-auto">
-		      <li class="nav-item active">
-		        <a class="nav-link" href="fleet.php">Our fleet<span class="sr-only">(current)</span></a>
+		      <li class="nav-item active"> <!-- active class indicates the current page-->
+		        <a class="nav-link" href="fleet.php">Our fleet</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="register.php">Register</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="logout.php">Log out</a>
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link" href="reservation.php">Make reservation</a>
