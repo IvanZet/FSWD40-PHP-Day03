@@ -7,60 +7,6 @@ if(isset($_SESSION['user'])!=""){
 	header('Location: home.php');
 	exit;
 }
-$error = false;
-
-if(isset($_POST['btn_login'])) {
-
-$email = mysqli_real_escape_string($con, $_POST['email']);
-$pass = mysqli_real_escape_string($con, $_POST['pass']);
-
- if(empty($email)){
-  $error = true;
-  $emailError = "Please enter your email address.";
- } else if ( !filter_var($email,FILTER_VALIDATE_EMAIL) ) {
-  $error = true;
-  $emailError = "Please enter valid email address.";
- }
-
- if(empty($pass)){
-  $error = true;
-  $passError = "Please enter your password.";
- }
-
-// if there's no error, continue to login
- if (!$error) {
-  
-  //$password = hash('sha256', $pass); // password hashing
-
-  $res=mysqli_query($con, "SELECT driver_id, first_name, last_name, pass FROM drivers WHERE email='$email'");
-  $count=0;
-  //var_dump(is_object($res));
-  if(is_object($res)) {
-	$count = mysqli_num_rows($res);
-	
-    if($count !=0){
-	  $row=mysqli_fetch_array($res, MYSQLI_ASSOC);
-	  var_dump($row);
-   // if uname/pass correct it returns must be 1 row
-  }
- }else {
- 	echo "User with this e-mail were not found";
- }
-
- 
-
-  if( $count == 1 && $row['pass']==$pass ) {
-   $_SESSION['user'] = $row['driver_id'];
-   header("Location: home.php");
-  } else {
-   $errMSG = "Incorrect Credentials, Try again...";
-  }
-  
- }
-
-
-}
-
 ?>
 
 
@@ -105,24 +51,10 @@ $pass = mysqli_real_escape_string($con, $_POST['pass']);
 		</nav>
 	</header>
 	<main>
-		<div class="jumbotron">
+		
 			<h1 class="display-4">Welcome to</h1>
 		  <h1>Cool wheels</h1> 
-		  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-		</div>
-		<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
-			<div class="form-group">
-				<label for="exampleFormControlInput1">Email:</label>
-				<input name="email"> <!--id="datepicker-->
-			</div>
-
-			<div class="form-group">
-				<label for="exampleFormControlInput1">Password:</label>
-				<input class="form-control" name="pass">
-			</div>
-			
-			<button type="submit" class="btn btn-block btn-primary" name="btn_login">Login</button>
-		</form>
+		  
 	</main>
 </body>
 </html>
