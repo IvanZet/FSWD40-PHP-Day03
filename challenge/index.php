@@ -4,6 +4,9 @@ session_start();
 require_once 'dbconnect.php';
 
 if(isset($_SESSION['user'])!=""){
+	/*unset($_SESSION['user']);
+	session_unset();
+	session_destroy();*/
 	header('Location: home.php');
 	exit;
 }
@@ -47,24 +50,17 @@ $pass = mysqli_real_escape_string($con, $_POST['pass']);
  	echo "User with this e-mail were not found";
  }
 
- 
-
   if( $count == 1 && $row['pass']==$pass ) {
    $_SESSION['user'] = $row['driver_id'];
    header("Location: home.php");
   } else {
    $errMSG = "Incorrect Credentials, Try again...";
   }
-  
+ 
  }
 
-
 }
-
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html>
